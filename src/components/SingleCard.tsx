@@ -9,7 +9,7 @@ interface SingleCardProps {
   disabled: boolean;
 }
 
-const getImagePath = (name: string): string  => `./img/${name}.png`;
+const getImagePath = (name: string): string  => `img/${name}.png`;
 
 export default function SingleCard({ card, handleChoice, flipped, disabled }: SingleCardProps) {
 
