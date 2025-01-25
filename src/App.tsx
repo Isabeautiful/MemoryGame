@@ -117,8 +117,11 @@ function App() {
 			});
 				
 			setCards(updatedCards);
-      // Chama o próximo quadro
-			requestAnimationFrame(animate); 
+      if(movingCards[0] != null){
+        // Chama o próximo quadro
+			  requestAnimationFrame(animate); 
+      }
+      
 			
 		} else {
 
@@ -134,6 +137,15 @@ function App() {
         setDisabled(false); // habilitar cartas para clique após a animação acabar
 				return card;
 			});
+
+
+      // Mudança de modo: Passos:
+      //  Interromper animação
+      //  Chamada recursiva coondicional
+      //  Resetar movingCards no new game
+      //    Criar um contexto swapCards
+
+
 
       setCards(updatedCardsFinal)
 
@@ -224,6 +236,8 @@ function App() {
       
     }, [movingPositions]);
   }
+
+  useEffect(() => newGame(), [mode]);
 
   // ==============================
 

@@ -1,5 +1,5 @@
 import './SingleCard.css'
-import { Card } from "../App";
+import { Card } from "../Types";
 
 // Definindo os tipos para as props do componente
 interface SingleCardProps {
