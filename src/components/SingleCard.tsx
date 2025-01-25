@@ -9,6 +9,7 @@ interface SingleCardProps {
   disabled: boolean;
 }
 
+const backImage = "img/bolha.png"
 const getImagePath = (name: string): string  => `img/${name}.png`;
 
 export default function SingleCard({ card, handleChoice, flipped, disabled }: SingleCardProps) {
@@ -24,13 +25,13 @@ export default function SingleCard({ card, handleChoice, flipped, disabled }: Si
   // Estilo que sobrescreverá parcialmente o estilo definido no arquivo css
   // Definindo a posição dele dentro do div, em porcentagem
   const overwritePosic = { 
-    top: `${card.posic[0]}%`, 
+    top: `${card.posic[0]}%`,
     left: `${card.posic[1]}%`
   }
 
   return (
     <div className='card' data-odd={odd} data-flipped={flippedString} style={overwritePosic}> 
-        <div className="back"></div>
+        <img className="back" src={backImage}></img>
         <img className='front' src={getImagePath(card.name)} onClick={handleClick} alt='card front' />
     </div>
   )
