@@ -1,17 +1,15 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
+import { AppContext } from './AppContext.tsx';
+import { Posic, Card, Player, Score } from './Types.tsx';
+
 import './App.css'
 import SingleCard from './components/SingleCard.tsx'
 
-type Player = number;
-type Score = [number, number];
-export type Posic = [number, number];
+// =====================================================
 
-export interface Card {
-	name: string;
-  matched: boolean;
-  id: number;
-	posic: Posic;
-}
+
+// =====================================================
+
 
 const createCard = (name: string): Card => {
 	return { name: name, matched: false, id: -1, posic: [0, 0] };
@@ -68,7 +66,10 @@ function App() {
 	// State
 	// ============
 
-  const [cards, setCards] = useState<Card[]>([])
+  const {
+    cards, setCards
+  } = useContext(AppContext)!;
+
   const [turns, setTurns] = useState<number>(0)
   const [playerTurn, setPlayerTurn] = useState<Player>(0) // Para alternar entre jogador 1 e 2
   const [score, setScore] = useState<Score>([0, 0]) // Para armazenar a pontuação dos jogadores
@@ -283,6 +284,7 @@ function App() {
 	}, [movingPositions]);
 
   return (
+
     <div className="App">
       <div className="heading">
         <h1>Bubble Memory</h1>
