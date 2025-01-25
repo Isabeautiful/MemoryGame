@@ -9,3 +9,8 @@ export interface Card {
   id: number;
 	posic: Posic;
 }
+
+export enum Mode {
+    NORMAL,
+    SWAP
+}

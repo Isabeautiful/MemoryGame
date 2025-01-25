@@ -1,15 +1,9 @@
 import { useEffect, useState, useContext } from 'react'
 import { AppContext } from './AppContext.tsx';
-import { Posic, Card } from './Types.tsx';
+import { Posic, Card, Mode } from './Types.tsx';
 
 import './App.css'
 import SingleCard from './components/SingleCard.tsx'
-
-// =====================================================
-
-
-// =====================================================
-
 
 const createCard = (name: string): Card => {
 	return { name: name, matched: false, id: -1, posic: [0, 0] };
@@ -68,24 +62,21 @@ function App() {
 
   const { 
       
-    cards,
-    setCards,
-    turns,
-    setTurns,
-    playerTurn,
-    setPlayerTurn,
-    score,
-    setScore,
-    choiceOne,
-    setChoiceOne,
-    choiceTwo,
-    setChoiceTwo,
-    disabled,
-    setDisabled,
+    cards, setCards, 
+    turns, setTurns, 
+    playerTurn, setPlayerTurn, 
+    score, setScore, 
+    choiceOne, setChoiceOne, 
+    choiceTwo, setChoiceTwo, 
+    disabled, setDisabled, 
+
+    newGame,
+    handleChoice,
+    resetTurn,
+
+    mode, setMode
     
   } = useContext(AppContext)!;
-
-
 
 	// Moving
 	const [movingCards, setMovingCards] = useState<(Card | null)[]>([null, null])
@@ -94,73 +85,6 @@ function App() {
 	// =============
 	// Definições
 	// =============
-
-	const indexToPosic = (index: Posic): Posic => {
-
-    /* Converte um índice de linha e coluna em uma posição baseada em porcentagem*/
-
-		return [
-			(100 * index[0]) / bubbleDimensions[0],
-			(100 * index[1]) / bubbleDimensions[1]
-		];
-	}
-
-  const newGame = () => {
-    
-    // Função para embaralhar as cartas e resetar o estado do jogo
-
-    //embaralha as cartas
-		const cardStockCopy1 = cardStock.map(card => createCard(card.name))
-		const cardStockCopy2 = cardStock.map(card => createCard(card.name))
-    const shuffledCards = [...cardStockCopy1, ...cardStockCopy2].sort(() => Math.random() - 0.5);
-
-		// Definir ids únicos
-		let id = 0;
-		for (let card of shuffledCards)
-			card.id = id++;
-
-        // Definir a posição de cada um em um "grade" de posições
-		for (let card of shuffledCards) {
-
-            // Convertendo id em coluna e linha
-			const column = card.id % bubbleDimensions[0];
-			const row = Math.floor(card.id / bubbleDimensions[0]);
-            
-            // Definindo posição em porcentagens, de acordo com coluna e linha (será usado dentro de "SingleCard")
-			card.posic = indexToPosic([column, row]);
-		}
-
-    // Resetando as variáveis de estado para começar um novo jogo
-    setChoiceOne(null)
-    setChoiceTwo(null)
-    setCards(shuffledCards)
-    setTurns(0)
-    setPlayerTurn(0) // Jogador 1 começa após cada novo jogo
-    setScore([0, 0]) // Resetando a pontuação dos jogadores
-  }
-
-  const handleChoice = (card: Card) => {
-    
-    //Seleção de Cartas nas variaveis de estado choice one ou two
-
-    if (card.id === choiceOne?.id) return; //tratamento de erro
-    choiceOne ? setChoiceTwo(card) : setChoiceOne(card)
-  }
-
-  const resetTurn = (isMatch: boolean) => {
-    
-    // reseta o turno
-
-    setChoiceOne(null)
-    setChoiceTwo(null)
-    setTurns(prevTurns => prevTurns + 1)
-    setDisabled(false)
-
-    // Alterna o jogador apenas se o jogador errar
-    if (!isMatch) {
-      setPlayerTurn(prev => (prev === 0 ? 1 : 0))
-    }
-  }
 
 	const animate = (time: number) => {
 
@@ -265,36 +189,45 @@ function App() {
     }
   }, [choiceOne, choiceTwo])
 
-	useEffect(() => {
+  // ============ SWAP ================== 
 
-		if (turns > 0) {
+  if (mode == Mode.SWAP) { 
+
+    useEffect(() => {
+
+      if (turns > 0) {
+    
+        // Se não estiver acontecendo movimento
+        if (movingPositions[0] == null) {
+  
+          // Sortear cartas
+          const movingCardsAux = [randomCard(cards), randomCard(cards)];
+  
+          while (movingCardsAux[0] === movingCardsAux[1])
+            movingCards[1] = randomCard(cards);
+  
+          // Definir como cartas a serem movidas
+          setMovingCards(movingCardsAux);
+          setMovingPositions(movingCardsAux.map(card => card?.posic));
+        }
+      }
+    
+    }, [turns]);
+  
+    useEffect(() => {    
+      /* Ao mudar moving positions, verifica e inicia a animação */
+      
+      if (movingPositions[0] != null){
+        requestAnimationFrame(animate);
+        setDisabled(true); //desabilitar cartas enquanto a animação de troca está sendo executada!
+      }
+      
+    }, [movingPositions]);
+  }
+
+  // ==============================
+
 	
-			// Se não estiver acontecendo movimento
-			if (movingPositions[0] == null) {
-
-				// Sortear cartas
-				const movingCardsAux = [randomCard(cards), randomCard(cards)];
-
-        while (movingCardsAux[0] === movingCardsAux[1])
-          movingCards[1] = randomCard(cards);
-
-				// Definir como cartas a serem movidas
-				setMovingCards(movingCardsAux);
-				setMovingPositions(movingCardsAux.map(card => card?.posic));
-			}
-		}
-	
-	}, [turns]);
-
-	useEffect(() => {    
-    /* Ao mudar moving positions, verifica e inicia a animação */
-		
-		if (movingPositions[0] != null){
-			requestAnimationFrame(animate);
-      setDisabled(true); //desabilitar cartas enquanto a animação de troca está sendo executada!
-    }
-		
-	}, [movingPositions]);
 
   return (
 
