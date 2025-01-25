@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from 'react'
 import { AppContext } from './AppContext.tsx';
-import { Posic, Card, Player, Score } from './Types.tsx';
+import { Posic, Card } from './Types.tsx';
 
 import './App.css'
 import SingleCard from './components/SingleCard.tsx'
@@ -66,16 +66,26 @@ function App() {
 	// State
 	// ============
 
-  const {
-    cards, setCards
+  const { 
+      
+    cards,
+    setCards,
+    turns,
+    setTurns,
+    playerTurn,
+    setPlayerTurn,
+    score,
+    setScore,
+    choiceOne,
+    setChoiceOne,
+    choiceTwo,
+    setChoiceTwo,
+    disabled,
+    setDisabled,
+    
   } = useContext(AppContext)!;
 
-  const [turns, setTurns] = useState<number>(0)
-  const [playerTurn, setPlayerTurn] = useState<Player>(0) // Para alternar entre jogador 1 e 2
-  const [score, setScore] = useState<Score>([0, 0]) // Para armazenar a pontuação dos jogadores
-  const [choiceOne, setChoiceOne] = useState<Card | null>(null)
-  const [choiceTwo, setChoiceTwo] = useState<Card | null>(null)
-  const [disabled, setDisabled] = useState<boolean>(false)
+
 
 	// Moving
 	const [movingCards, setMovingCards] = useState<(Card | null)[]>([null, null])
@@ -264,6 +274,9 @@ function App() {
 
 				// Sortear cartas
 				const movingCardsAux = [randomCard(cards), randomCard(cards)];
+
+        while (movingCardsAux[0] === movingCardsAux[1])
+          movingCards[1] = randomCard(cards);
 
 				// Definir como cartas a serem movidas
 				setMovingCards(movingCardsAux);
