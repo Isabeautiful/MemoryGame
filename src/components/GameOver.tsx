@@ -15,7 +15,7 @@ export default function GameOver({ winner, newGame, hidden}: GameOverProps){
             <div className="game-over">
                 <h2>Fim de jogo!</h2>
                 <p>O vencedor é: {winner}</p>
-                <button className='game-over-btn' onClick={newGame}>Novo Jogo</button>
+                <button className='game-over-btn' onClick={newGame}>New Game</button>
             </div>
         </div>
     )

@@ -9,8 +9,8 @@ export default function GameOver({ turns, playerTurn}: GameInfoProps){
     if(playerTurn == 0){
         return(
             <div className="game-info">
-                <p>Turnos: {turns}</p>
-                <p>Jogador Atual: <span className="color-1">Jogador 1</span></p>
+                <p>Turn: {turns}</p>
+                <p>Current Player: <span className="color-1">Player 1</span></p>
             </div>
         )
     }
@@ -18,7 +18,7 @@ export default function GameOver({ turns, playerTurn}: GameInfoProps){
         return(
             <div className="game-info">
                 <p>Turnos: {turns}</p>
-                <p>Jogador Atual: <span className='color-2'>Jogador 2</span></p>
+                <p>Current Player: <span className='color-2'>Player 2</span></p>
             </div>
         )
     }

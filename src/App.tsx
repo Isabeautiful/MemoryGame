@@ -354,11 +354,11 @@ function App() {
 
     //determina o vencedor
     if(score[0] > score[1]){
-      setWinner('Jogador 1');
+      setWinner('Player 1');
     }else if(score[1] > score[0]){
-      setWinner('Jogador 2');
+      setWinner('Player 2');
     }else{
-      setWinner('Empate!');
+      setWinner('Draw!');
     }
     
   },[cards,score]);
@@ -367,7 +367,7 @@ function App() {
     <div className="App">
       <div className="heading">
         <h1>Pirate Memory</h1>
-        <button onClick={newGame}>Novo Jogo</button>
+        <button onClick={newGame}>New Game</button>
       </div>
 
       <div className="grid-container">
@@ -390,8 +390,8 @@ function App() {
       />
 
       <div className="scoreboard">
-        <p id='player-1'>Jogador 1: {score[0]}</p>
-        <p id='player-2'>Jogador 2: {score[1]}</p>
+        <p id='player-1'>Player 1: {score[0]}</p>
+        <p id='player-2'>Player 2: {score[1]}</p>
       </div>
 
       <GameOver
