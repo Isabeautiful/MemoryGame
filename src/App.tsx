@@ -33,6 +33,14 @@ const cardStock: Card[] = [
 	createCard("gancho")
 ]
 
+const audio = document.getElementById('background-music')! as HTMLAudioElement;
+
+document.addEventListener('click', () => {
+  if (audio.paused) {
+    audio.play();
+  }
+});
+
 // ============= Moving =============
 
 const bubbleDimensions = [3, 6];
