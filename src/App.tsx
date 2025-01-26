@@ -21,12 +21,12 @@ const createCard = (name: string): Card => {
 const cardStock: Card[] = [
 
 	createCard("bandeira"),
-	createCard("bau-tesouro"),
+	createCard("bau_tesouro"),
 	createCard("bussola"),
 	createCard("chapeu"),
 	createCard("moeda"),
 	createCard("rum"),
-	createCard("roda-barco"),
+	createCard("roda_barco"),
 	createCard("bomba"),
 	createCard("gancho")
 ]
