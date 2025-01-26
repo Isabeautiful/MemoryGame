@@ -16,7 +16,7 @@ body{
 
 .App {
   max-width: 80%;
-  margin: 10px auto;
+  margin: 0px auto;
   /* tirar seleção de imagens */
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
