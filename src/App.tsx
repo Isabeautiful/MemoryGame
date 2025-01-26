@@ -43,7 +43,10 @@ document.addEventListener('click', () => {
 
 // ============= Moving =============
 
-const bubbleDimensions = [3, 6];
+const levels = [
+  [2,2],
+  [3,6]
+]; 
 
 function lerp(start: Posic, end: Posic, t: number): Posic {
 
@@ -81,6 +84,8 @@ function App() {
 
   const [cards, setCards] = useState<Card[]>([])
   const [turns, setTurns] = useState<number>(0)
+  const [currentLevel, setCurrentLevel] = useState<number>(0)
+  const [bubbleDimensions, setBubbleDimensions] = useState<number[]>(levels[0])
   const [playerTurn, setPlayerTurn] = useState<Player>(0) // Para alternar entre jogador 1 e 2
   const [score, setScore] = useState<Score>([0, 0]) // Para armazenar a pontuação dos jogadores
   const [choiceOne, setChoiceOne] = useState<Card | null>(null)
@@ -105,19 +110,32 @@ function App() {
 
     /* Converte um índice de linha e coluna em uma posição baseada em porcentagem*/
 
+    const fraction = [
+      
+      1 / (bubbleDimensions![0] + 0),
+      1 / (bubbleDimensions![1] + 1)
+    ]
+
+
 		return [
-			(100 * index[0]) / bubbleDimensions[0],
-			(100 * index[1]) / bubbleDimensions[1]
+			100 * (index[0] + 0) * fraction[0],
+			100 * (index[1] + 1) * fraction[1]
 		];
 	}
 
   const newGame = () => {
     
-    // Função para embaralhar as cartas e resetar o estado do jogo
+    // Quantidade de cartas
+    const n = (bubbleDimensions[0] * bubbleDimensions[1])
+  
+    if (n % 2 != 0)
+      throw new Error("Número impar de cartas");
+
+    const cardsUsed = cardStock.slice(0, n/2);
 
     //embaralha as cartas
-		const cardStockCopy1 = cardStock.map(card => createCard(card.name))
-		const cardStockCopy2 = cardStock.map(card => createCard(card.name))
+		const cardStockCopy1 = cardsUsed.map(card => createCard(card.name))
+		const cardStockCopy2 = cardsUsed.map(card => createCard(card.name))
     const shuffledCards = [...cardStockCopy1, ...cardStockCopy2].sort(() => Math.random() - 0.5);
 
 		// Definir ids únicos
@@ -306,15 +324,37 @@ function App() {
 		
 	}, [movingPositions]);
 
+  useEffect(() => {
+
+    newGame();
+
+  }, [currentLevel]);
+
   //Gerenciamento de vencedores
   useEffect(()=>{
-    if(cards.every(card=>card.matched)){
-      setGameOver(true);
-      if(gameOver){
-        setHidden(false);
+    
+    // Fez todos os matches
+    if(cards.length > 0 && cards.every(card=>card.matched)){
+
+      
+      // É o ultimo nível
+      if (currentLevel == levels.length-1) {
+        
+        setGameOver(true);
+        if(gameOver){
+          setHidden(false);
+        }
+        
+      } 
+      
+      // Avançar nível
+      else {
+
+        setCurrentLevel(currentLevel+1);
+        setBubbleDimensions(levels[currentLevel+1])
       }
-      //talvez else set hidden true
     }
+
     //determina o vencedor
     if(score[0] > score[1]){
       setWinner('Jogador 1');
