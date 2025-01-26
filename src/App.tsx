@@ -31,7 +31,7 @@ const cardStock: Card[] = [
 	createCard("roda_barco"),
 	createCard("bomba"),
 	createCard("gancho")
-]
+];
 
 const audio = document.getElementById('background-music')! as HTMLAudioElement;
 
@@ -336,16 +336,19 @@ function App() {
           playerTurn={playerTurn}
         />
       </div>
-      <div className="card-grid">
-        {cards.map(card => (
-          <SingleCard
+
+      <div className="grid-container">
+        <div className="card-grid">
+          {cards.map(card => (
+            <SingleCard
             key={card.id}
             card={card}
             handleChoice={handleChoice}
             flipped={card === choiceOne || card === choiceTwo || card.matched}
             disabled={disabled}
-          />
-        ))}
+            />
+          ))}
+        </div>
       </div>
 
       <GameInfo
