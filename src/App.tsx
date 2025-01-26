@@ -3,6 +3,7 @@ import './App.css'
 import SingleCard from './components/SingleCard.tsx'
 import GameOver from './components/GameOver.tsx'
 import Story from './components/Story.tsx'
+import GameInfo from './components/GameInfo.tsx'
 
 type Player = number;
 type Score = [number, number];
@@ -338,14 +339,14 @@ function App() {
         ))}
       </div>
 
-      <div className="game-info">
-        <p>Turnos: {turns}</p>
-        <p>Jogador Atual: {playerTurn === 0 ? "Jogador 1" : "Jogador 2"}</p>
-      </div>
+      <GameInfo
+        turns={turns}
+        playerTurn={playerTurn}
+      />
 
       <div className="scoreboard">
-        <p>Jogador 1: {score[0]}</p>
-        <p>Jogador 2: {score[1]}</p>
+        <p className='player-1'>Jogador 1: {score[0]}</p>
+        <p className='player-2'>Jogador 2: {score[1]}</p>
       </div>
 
       <GameOver

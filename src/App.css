@@ -49,11 +49,6 @@ button:hover {
   height: 400px; /*Define altura da grid => Posições das bolhas se adaptarão de acordo */
 }
 
-.game-info{
-  display: flex;
-  justify-content: space-between;
-}
-
 .scoreboard {
   display: flex;
   width: 30%;

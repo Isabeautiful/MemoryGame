@@ -1,0 +1,14 @@
+.game-info{
+    display: flex;
+    justify-content: space-between;
+}
+.game-info p{
+    margin: 0;
+}
+
+.player-1{
+    color: orangered;
+}
+.player-2{
+    color: #14ec5c;
+}
