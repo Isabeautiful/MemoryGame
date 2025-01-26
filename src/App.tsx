@@ -366,7 +366,7 @@ function App() {
   return (
     <div className="App">
       <div className="heading">
-        <h1>Bubble Memory</h1>
+        <h1>Pirate Memory</h1>
         <button onClick={newGame}>Novo Jogo</button>
       </div>
 
