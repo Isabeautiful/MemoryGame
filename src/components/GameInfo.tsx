@@ -10,7 +10,7 @@ export default function GameOver({ turns, playerTurn}: GameInfoProps){
         return(
             <div className="game-info">
                 <p>Turnos: {turns}</p>
-                <p>Jogador Atual: <span className="player-1">Jogador 1</span></p>
+                <p>Jogador Atual: <span className="color-1">Jogador 1</span></p>
             </div>
         )
     }
@@ -18,7 +18,7 @@ export default function GameOver({ turns, playerTurn}: GameInfoProps){
         return(
             <div className="game-info">
                 <p>Turnos: {turns}</p>
-                <p>Jogador Atual: <span className='player-2'>Jogador 2</span></p>
+                <p>Jogador Atual: <span className='color-2'>Jogador 2</span></p>
             </div>
         )
     }

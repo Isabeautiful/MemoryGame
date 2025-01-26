@@ -4,7 +4,8 @@
     align-items: center;
 }
 
-.story-container p {
+.player-1,
+.player-2 {
     background-color: white;
     color: black;
     border: 1px solid black;
@@ -12,4 +13,11 @@
     padding: 2px;
     text-align: center;
     width: 15em;
+}
+
+.color-1{
+    color: rgb(236, 191, 175)
+}
+.color-2{
+    color: #b5e7c6
 }

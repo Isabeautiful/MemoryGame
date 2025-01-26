@@ -152,9 +152,7 @@ function App() {
   }
 
   const resetTurn = (isMatch: boolean) => {
-    
     // reseta o turno
-
     setChoiceOne(null)
     setChoiceTwo(null)
     setTurns(prevTurns => prevTurns + 1)
@@ -325,7 +323,10 @@ function App() {
       <div className="heading">
         <h1>Bubble Memory</h1>
         <button onClick={newGame}>Novo Jogo</button>
-        <Story idParagraph={idParagraph}/>
+        <Story 
+          idParagraph={idParagraph}
+          playerTurn={playerTurn}
+        />
       </div>
       <div className="card-grid">
         {cards.map(card => (
@@ -345,8 +346,8 @@ function App() {
       />
 
       <div className="scoreboard">
-        <p className='player-1'>Jogador 1: {score[0]}</p>
-        <p className='player-2'>Jogador 2: {score[1]}</p>
+        <p id='player-1'>Jogador 1: {score[0]}</p>
+        <p id='player-2'>Jogador 2: {score[1]}</p>
       </div>
 
       <GameOver

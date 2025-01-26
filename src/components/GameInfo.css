@@ -6,9 +6,9 @@
     margin: 0;
 }
 
-.player-1{
-    color: orangered;
+#player-1{
+    color: rgb(236, 191, 175);
 }
-.player-2{
-    color: #14ec5c;
+#player-2{
+    color: #b5e7c6;
 }
