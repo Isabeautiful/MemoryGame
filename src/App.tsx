@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import SingleCard from './components/SingleCard.tsx'
-import GameOver from './components/GameOver.tsx';
+import GameOver from './components/GameOver.tsx'
+import Story from './components/Story.tsx'
 
 type Player = number;
 type Score = [number, number];
@@ -80,6 +81,8 @@ function App() {
   const [gameOver, setGameOver] = useState<boolean>(false)
   const [winner, setWinner] = useState<string>("")
   const [hidden,setHidden] = useState<boolean>(true)
+  //gerenciar balões de historia
+  const [idParagraph, setIdParagraph] = useState<number>(0)
 
 	// Moving
 	const [movingCards, setMovingCards] = useState<(Card | null)[]>([null, null])
@@ -131,6 +134,7 @@ function App() {
     setTurns(0)
     setPlayerTurn(0) // Jogador 1 começa após cada novo jogo
     setScore([0, 0]) // Resetando a pontuação dos jogadores
+    setIdParagraph(0) //Reseta a historia pra começar de novo
     setMovingPositions([null,null])
     movingPositions[0] = null
     cancelAnimationFrame
@@ -240,6 +244,7 @@ function App() {
     if (choiceOne && choiceTwo) {
       setDisabled(true)
       if (choiceOne.name === choiceTwo.name) {
+        setIdParagraph(prevId => prevId + 1) //muda o id do paragrafo a cada match
         setCards(prevCards => {
           return prevCards.map(card => {
 
@@ -319,8 +324,8 @@ function App() {
       <div className="heading">
         <h1>Bubble Memory</h1>
         <button onClick={newGame}>Novo Jogo</button>
+        <Story idParagraph={idParagraph}/>
       </div>
-
       <div className="card-grid">
         {cards.map(card => (
           <SingleCard
@@ -348,7 +353,6 @@ function App() {
        newGame = {newGame}
        hidden = {hidden}
       />
-
     </div>
   )
 }
