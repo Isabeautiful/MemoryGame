@@ -44,6 +44,8 @@ document.addEventListener('click', () => {
 
 const levels = [
   [2,2],
+  [2,3],
+  [3,4],
   [3,6]
 ]; 
 
