@@ -1,4 +1,13 @@
 # Pirate Memory Game Project
+You've never seen a memory game like this! Can you find all the matching bubbles while they keep swapping places?
+
+Instructions:
+Each bubble hides a pirate symbol
+Click two bubbles each turn to try to match them
+If you miss they'll become hidden again, if you get it right they'll keep revealed
+At the end of each turn two bubbles will swap places
+Can you keep track of them?
+
 This is a Game developed by Isabela Coelho and Gustavo Campos, it was based on a great youtube tutorial "Build a Memory Game with React" By Net Ninja. The tutorial can be found at Youtube: https://www.youtube.com/watch?v=ZCKohZwGZMw&list=PL4cUxeGkcC9iQ7g2eoNXHCJBBBz40S_Lm
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
